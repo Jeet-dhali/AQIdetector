@@ -1,4 +1,5 @@
 import { locationData } from "./data.js";
+import { computeAQI } from "./aqiConversion.js";
 
 document.addEventListener("DOMContentLoaded", () => {
 
@@ -21,8 +22,9 @@ async function renderPage() {
     const aqi = data.aqi;
     const pm2_5 = data.pm2_5;
     const pm10 = data.pm10;
+    const newAQI = computeAQI(pm2_5, pm10);
 
-    renderAqiHTML(aqi);
+    renderAqiHTML(newAQI);
     renderLocationHTML(name, country);
     renderPollutantsHTML(pm2_5, pm10);
 }
@@ -97,11 +99,17 @@ async function updateAqi() {
     if (getLocationName() != "Use current location") {
         const coords = getCoordsByName(getLocationName());
         const data = await fetchRequestToBackend(coords);
-        document.querySelector('.aqi').textContent = data.aqi;
+        const pm2_5 = data.pm2_5;
+        const pm10 = data.pm10;
+        const newAQI = computeAQI(pm2_5, pm10);
+        document.querySelector('.aqi').textContent = newAQI;
     } else {
         const coords = await geoLocation();
         const data = await fetchRequestToBackend(coords);
-        document.querySelector('.aqi').textContent = data.aqi;
+        const pm2_5 = data.pm2_5;
+        const pm10 = data.pm10;
+        const newAQI = computeAQI(pm2_5, pm10);
+        document.querySelector('.aqi').textContent = newAQI;
     }
 }
 
@@ -113,10 +121,13 @@ async function loadData() {
     const locationData = await fetchLocation(coords);
     const locationName = locationData.name;
     const locationCountry = locationData.country;
+    const pm2_5 = data.pm2_5;
+    const pm10 = data.pm10;
+    const newAQI = computeAQI(pm2_5, pm10);
     document.querySelector('.location-display').textContent = `${locationName}, ${locationCountry}`;
-    document.querySelector('.aqi').textContent = data.aqi;
-    document.querySelector('.pm25').textContent = data.pm2_5;
-    document.querySelector('.pm10').textContent = data.pm10;
+    document.querySelector('.aqi').textContent = newAQI;
+    document.querySelector('.pm25').textContent = `PM2.5 : ${data.pm2_5}`;
+    document.querySelector('.pm10').textContent = `PM2.5 : ${data.pm10}`;
 }
 
 //update pollutants
@@ -130,8 +141,8 @@ async function updatePollutantData() {
     } else {
         const coords = await geoLocation();
         const data = await fetchRequestToBackend(coords);
-        document.querySelector('.pm25').textContent = data.pm2_5;
-        document.querySelector('.pm10').textContent = data.pm10;
+        document.querySelector('.pm25').textContent = `PM2.5 : ${data.pm2_5}`;
+        document.querySelector('.pm10').textContent = `PM2.5 : ${data.pm10}`;
     }
 }
 
