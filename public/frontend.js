@@ -1,65 +1,140 @@
 import { locationData } from "./data.js";
 
+document.addEventListener("DOMContentLoaded", () => {
+
 const changeButton = document.querySelector('.change-btn');
 const refreshButton = document.querySelector('.refresh-btn');
-const locationDisplay = document.querySelector('.location-display');
-const aqiDisplay = document.querySelector('.aqi');
 const locationSelector = document.querySelector('.location-selector');
-const pm2_5 = document.querySelector('.pm25');
-const pm10 = document.querySelector('.pm10');
 
 loadData();
+
+//HTML Renderer
+
+renderPage();
+
+async function renderPage() {
+    const coords = await geoLocation();
+    const locationData = await fetchLocation(coords);
+    const name = locationData.name;
+    const country = locationData.country;
+    const data = await fetchRequestToBackend(coords);
+    const aqi = data.aqi;
+    const pm2_5 = data.pm2_5;
+    const pm10 = data.pm10;
+
+    renderAqiHTML(aqi);
+    renderLocationHTML(name, country);
+    renderPollutantsHTML(pm2_5, pm10);
+}
+
+function pollutantsHTML(pm2_5, pm10) {
+    const html = `<div class="pollutant-card pm25">
+                    PM2.5 : ${pm2_5}
+                </div>
+                <div class="pollutant-card pm10">
+                    PM10 : ${pm10}
+                </div>`;
+    return html;
+}
+
+function renderPollutantsHTML(pm2_5, pm10) {
+    let html = ``;
+    html += pollutantsHTML(pm2_5, pm10);
+    document.querySelector('.pollutants-grid').innerHTML = html;
+}
+
+function locationHTML(name, country) {
+    const html = `<h1>Air Aware</h1>
+                <div class="location-display">
+                    ${name}, ${country}
+                </div>`;
+    return html;
+}
+
+function renderLocationHTML(name, country) {
+    let html = ``;
+    html += locationHTML(name, country);
+    document.querySelector('.header').innerHTML = html;
+}
+
+function aqiHTML(aqi) {
+    const html = `<div class="aqi">${aqi}</div>`;
+    return html;
+}
+
+function renderAqiHTML(aqi) {
+    let html = ``;
+    html += aqiHTML(aqi);
+    document.querySelector('.aqi-display').innerHTML = html;
+}
+
+//location state
 
 function getLocationName() {
     return locationSelector.value;
 }
 
-function updateLocationName() {
-    if (getLocationName != "use current location"){
-    locationDisplay.textContent = getLocationName();
-    } else {
-        const coords = geoLocation();
-        const locationData = fetchLocation(coords);
+async function updateLocationName() {
+    if (getLocationName() != "use current location"){
+        const coords = getCoordsByName(getLocationName());
+        const locationData = await fetchLocation(coords);
         const name = locationData.name;
         const country = locationData.country;
-        locationDisplay.textContent = `${name}, ${country}`;
+        document.querySelector('.location-display').textContent = `${name}, ${country}`;
+    } else {
+        const coords = await geoLocation();
+        const locationData = await fetchLocation(coords);
+        const name = locationData.name;
+        const country = locationData.country;
+        document.querySelector('.location-display').textContent = `${name}, ${country}`;
     }
 }
+
+//aqi
 
 async function updateAqi() {
     if (getLocationName() != "Use current location") {
         const coords = getCoordsByName(getLocationName());
         const data = await fetchRequestToBackend(coords);
-        aqiDisplay.textContent = data.aqi;
+        document.querySelector('.aqi').textContent = data.aqi;
     } else {
         const coords = await geoLocation();
         const data = await fetchRequestToBackend(coords);
-        aqiDisplay.textContent = data.aqi;
+        document.querySelector('.aqi').textContent = data.aqi;
     }
 }
+
+//load data on refresh
 
 async function loadData() {
     const coords = await geoLocation();
     const data = await fetchRequestToBackend(coords);
-    aqiDisplay.textContent = data.aqi;
-    pm2_5.textContent = data.pm2_5;
-    pm10.textContent = data.pm10;
+    const locationData = await fetchLocation(coords);
+    const locationName = locationData.name;
+    const locationCountry = locationData.country;
+    document.querySelector('.location-display').textContent = `${locationName}, ${locationCountry}`;
+    document.querySelector('.aqi').textContent = data.aqi;
+    document.querySelector('.pm25').textContent = data.pm2_5;
+    document.querySelector('.pm10').textContent = data.pm10;
 }
 
+//update pollutants
 
 async function updatePollutantData() {
     if (getLocationName() != "Use current location") {
         const coords = getCoordsByName(getLocationName());
         const data = await fetchRequestToBackend(coords);
-        pm2_5.textContent = data.pm2_5;
-        pm10.textContent = data.pm10;
+        document.querySelector('.pm25').textContent = data.pm2_5;
+        document.querySelector('.pm10').textContent = data.pm10;
     } else {
         const coords = await geoLocation();
         const data = await fetchRequestToBackend(coords);
-        pm2_5.textContent = data.pm2_5;
-        pm10.textContent = data.pm10;
+        document.querySelector('.pm25').textContent = data.pm2_5;
+        document.querySelector('.pm10').textContent = data.pm10;
     }
 }
+
+//helper functions
 
 function getCoordsByName(locationName) {
     const location = locationData.find((data) => data.name === locationName);
@@ -81,6 +156,8 @@ async function geoLocation() {
         );
     });
 }
+
+//fetch to backend
 
 async function fetchRequestToBackend(coords) {
     const response = await fetch('/api/aqi', {
@@ -113,3 +190,4 @@ changeButton.addEventListener('click', () => {
 refreshButton.addEventListener('click', () => {
     loadData();
 })
+});
