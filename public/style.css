@@ -1,0 +1,122 @@
+body {
+    margin: 0px;
+    padding: 0px;
+    background-color: rgb(3, 10, 32);
+}
+
+.main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.main-body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 600px;
+    width: 1000px;
+    background-color: rgb(6, 15, 58);
+    box-shadow: 0 0px 10px rgb(57, 51, 118);
+}
+
+header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+header h1, .location-display {
+    height: 10px;
+    color: rgb(167, 167, 167);
+}
+
+.aqi-display {
+    display: flex;
+    align-items: center;
+    height: 150px;
+    justify-content: center;
+}
+
+.aqi {
+    display: flex;
+    color: white;
+    height: 80px;
+    width: 80px;
+    background-color: rgb(35, 182, 35);
+    justify-content: center;
+    border-radius: 10px;
+    align-items: center;
+    font-size: 30px;
+}
+
+.pollutants-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    place-items: center;
+    color: white;
+    column-gap: 300px;
+}
+
+.pollutant-card {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 50px;
+    width: 150px;
+    border: 1px solid white;
+    border-radius: 5px;
+}
+
+.info-card {
+    display: flex;
+    flex-direction: column;
+    color: white;
+    border: 1px solid white;
+    padding-left: 20px;
+    margin-top: 50px;
+    height: auto;
+    width: 75%;
+    justify-content: center;
+    align-items: center;
+}
+
+.info-badges {
+    display: flex;
+    flex-direction: row;
+    padding: 0px;
+    gap: 20px;
+    list-style: none;
+}
+
+.location-selection {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.change-btn, .refresh-btn {
+    height: 50px;
+    color: white;
+    background-color: rgb(16, 102, 172);
+    border: none;
+    width: 100px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 28;
+}
+
+.location-selector {
+    height: 50px;
+    border-radius: 10px;
+    text-align: center;
+    background-color: rgb(30, 69, 104);
+    border: none;
+    color: white;
+}
+

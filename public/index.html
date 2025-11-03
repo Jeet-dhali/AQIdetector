@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>AQIDetector</title>
+</head>
+<body>
+    <main class="main">
+        <div class="main-body">
+            <header class="header">
+                <h1>Air Aware</h1>
+                <div class="location-display">
+                    Chumukedima, IN
+                </div>
+            </header>
+            
+            <div class="aqi-display">
+                <div class="aqi">34</div>
+            </div>
+            <div class="pollutants-grid">
+                <div class="pollutant-card pm25">
+                    PM2.5 : 10
+                </div>
+                <div class="pollutant-card pm10">
+                    PM10 : 8
+                </div>
+            </div>
+            <div class="info-card">
+                <h3 class='info-title'>AQI Scale</h3>
+                <ul class='info-badges'>
+                    <li class='badge good'>Less than 50 : Good</li>
+                    <li class='badge fair'>50 - 100 : Fair</li>
+                    <li class='badge moderate'>100 - 150 : Moderate</li>
+                    <li class='badge poor'>150 - 200 : Poor</li>
+                    <li class='badge very-poor'>Above 200 :  Very Poor</li>
+                </ul>
+            </div>
+            <div class="location-selection">
+                <div class="location">
+                    <select class="location-selector">
+                        <option class="location-names">Delhi</option>
+                        <option class="location-names">Mumbai</option>
+                        <option class="location-names">Kolkata</option>
+                        <option class="location-names">Use current location</option>
+                    </select>
+                </div>
+                
+                <div class="btns">
+                    <button class="change-btn">Change</button>
+                    <button class="refresh-btn">Refresh</button>
+                </div>
+                
+            </div>
+        </div>
+    </main>
+    <script type="module" src="frontend.js"></script> 
+</body>
+</html>

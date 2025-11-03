@@ -1,0 +1,5 @@
+render html using javascript
+fix object promise bug
+fix any other bugs related to changing locationSelector
+rework the whole UI/UX
+
