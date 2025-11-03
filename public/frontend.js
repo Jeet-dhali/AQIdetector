@@ -45,6 +45,7 @@ function renderPollutantsHTML(pm2_5, pm10) {
 
 function locationHTML(name, country) {
     const html = `<h1>Air Aware</h1>
+                <h4>Real Time Air Quality Monitoring</h4>
                 <div class="location-display">
                     ${name}, ${country}
                 </div>`;
@@ -150,7 +151,7 @@ async function geoLocation() {
                 resolve({lat, lon}); 
             },
             (error) => {
-                console.error("Error getting location:", error.message);
+                console.error("Error:", error.message);
                 reject(error); 
             }
         );

@@ -26,12 +26,16 @@ header {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-bottom: 10px;
+    margin-top: 20px;
 }
 
-header h1, .location-display {
+header h1, .location-display{
     height: 10px;
-    color: rgb(167, 167, 167);
+    color: rgb(255, 255, 255);
+}
+
+.header h4 {
+    color: rgb(217, 217, 217);
 }
 
 .aqi-display {
@@ -39,6 +43,8 @@ header h1, .location-display {
     align-items: center;
     height: 150px;
     justify-content: center;
+    margin-top: 30px;
+    margin-bottom: 30px;
 }
 
 .aqi {
@@ -56,9 +62,11 @@ header h1, .location-display {
 .pollutants-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
+    width: 75%;
     place-items: center;
     color: white;
-    column-gap: 300px;
+    column-gap: 30px;
+    
 }
 
 .pollutant-card {
@@ -66,22 +74,24 @@ header h1, .location-display {
     align-items: center;
     justify-content: center;
     height: 50px;
-    width: 150px;
-    border: 1px solid white;
+    width: 100%;
     border-radius: 5px;
+    background-color: rgba(118, 118, 118, 0.316);
 }
 
 .info-card {
     display: flex;
     flex-direction: column;
     color: white;
-    border: 1px solid white;
-    padding-left: 20px;
-    margin-top: 50px;
+    border-radius: 10px;
+    margin-top: 40px;
+    margin-bottom: 20px;
     height: auto;
     width: 75%;
     justify-content: center;
     align-items: center;
+    background-color: rgba(22, 22, 87, 0.616);
+    box-shadow: 0px 0px 2px rgba(77, 77, 215, 0.526);
 }
 
 .info-badges {
@@ -90,14 +100,42 @@ header h1, .location-display {
     padding: 0px;
     gap: 20px;
     list-style: none;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.badge {
+    padding: 3px;
+    border-radius: 2px;
+}
+
+.good {
+    background-color: rgb(0, 212, 39);
+}
+
+.fair {
+    background-color: rgb(0, 197, 197);
+}
+
+.moderate {
+    background-color: orange;
+}
+
+.poor {
+    background-color: red;
+}
+
+.very-poor {
+    background-color: purple;
 }
 
 .location-selection {
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
-    width: 100%;
+    justify-content: space-between;
+    width: 75%;
     margin-top: 20px;
+    margin-bottom: 50px;
 }
 
 .change-btn, .refresh-btn {
@@ -108,15 +146,47 @@ header h1, .location-display {
     width: 100px;
     border-radius: 10px;
     cursor: pointer;
-    font-size: 28;
+    font-size: large;
+}
+
+.change-btn:hover{
+    background-color: rgba(16, 102, 172, 0.607);
+    transform: translateY(-2px);
+    transition: ease;
+}
+
+.change-btn:active {
+    background-color: rgba(16, 102, 172, 0.242);
+    transform: translateY(1px);
+    transition: ease;
+}
+
+.refresh-btn:hover{
+    background-color: rgba(16, 102, 172, 0.607);
+    transform: translateY(-2px);
+    transition: ease;
+}
+
+.refresh-btn:active {
+    background-color: rgba(16, 102, 172, 0.242);
+    transform: translateY(1px);
+    transition: ease;
+}
+
+.change-btn {
+    margin-right: 20px;
 }
 
 .location-selector {
     height: 50px;
+    width: 500px;
     border-radius: 10px;
     text-align: center;
     background-color: rgb(30, 69, 104);
     border: none;
+    outline: none;
     color: white;
+    cursor: pointer;
+    font-size: large;
 }
 
