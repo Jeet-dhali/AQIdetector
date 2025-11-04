@@ -1,5 +1,0 @@
-render html using javascript => done
-fix object promise bug => done
-fix any other bugs related to changing locationSelector => done
-rework the whole UI/UX => done
-
