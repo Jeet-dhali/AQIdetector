@@ -16,7 +16,7 @@ body {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    height: 600px;
+    height: 650px;
     width: 1000px;
     background-color: rgb(6, 15, 58);
     box-shadow: 0 0px 10px rgb(57, 51, 118);
@@ -40,6 +40,7 @@ header h1, .location-display{
 
 .aqi-display {
     display: flex;
+    flex-direction: column;
     align-items: center;
     height: 150px;
     justify-content: center;
@@ -57,6 +58,12 @@ header h1, .location-display{
     border-radius: 10px;
     align-items: center;
     font-size: 30px;
+}
+
+.aqi-summary {
+    color: white;
+    font-size: larger;
+    margin-top: 5px;
 }
 
 .pollutants-grid {
@@ -189,4 +196,136 @@ header h1, .location-display{
     cursor: pointer;
     font-size: large;
 }
+
+@media (max-width: 1024px) {
+  .main-body {
+    width: 90%;
+    height: auto;
+    padding: 20px;
+  }
+
+  .pollutants-grid {
+    grid-template-columns: 1fr 1fr;
+    width: 90%;
+  }
+
+  .location-selection {
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    width: 90%;
+  }
+
+  .location-selector {
+    width: 100%;
+  }
+
+  .change-btn, .refresh-btn {
+    width: 120px;
+  }
+}
+
+@media (max-width: 768px) {
+  body {
+    background-color: rgb(3, 10, 32);
+  }
+
+  .main {
+    height: auto;
+    padding: 20px 0;
+  }
+
+  .main-body {
+    width: 85%;
+    height: auto;
+    padding: 15px;
+    box-shadow: 0 0px 8px rgb(45, 45, 90);
+  }
+
+  header {
+    margin-top: 10px;
+  }
+
+  header h1 {
+    font-size: 1.5rem;
+    text-align: center;
+  }
+
+  .aqi {
+    width: 70px;
+    height: 70px;
+    font-size: 24px;
+  }
+
+  .aqi-summary {
+    font-size: 1rem;
+  }
+
+  .pollutants-grid {
+    grid-template-columns: 1fr;
+    row-gap: 10px;
+    width: 100%;
+  }
+
+  .pollutant-card {
+    height: 45px;
+    width: 90%;
+    font-size: 0.9rem;
+  }
+
+  .info-card {
+    width: 95%;
+    font-size: 0.9rem;
+    padding: 10px;
+  }
+
+  .info-badges {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .location-selection {
+    flex-direction: column;
+    width: 100%;
+    gap: 10px;
+    margin-bottom: 30px;
+  }
+
+  .location-selector {
+    width: 100%;
+    font-size: 1rem;
+  }
+
+  .change-btn, .refresh-btn {
+    width: 100%;
+    height: 45px;
+    font-size: 1rem;
+  }
+
+  .change-btn {
+    margin-bottom: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .aqi {
+    width: 60px;
+    height: 60px;
+    font-size: 20px;
+  }
+
+  header h1 {
+    font-size: 1.2rem;
+  }
+
+  .location-selector {
+    font-size: 0.9rem;
+  }
+
+  .pollutant-card {
+    font-size: 0.8rem;
+  }
+}
+
 

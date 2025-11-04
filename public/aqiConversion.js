@@ -38,6 +38,22 @@ function interpAQI(C, breakpoints) {
   return null;
 }
 
+export function getAqiSummary(aqi) {
+  if (aqi <= 50) {return 'Good'; }
+  else if (aqi > 50 && aqi <= 100) {return 'Fair';}
+  else if (aqi > 100 && aqi <= 150) {return 'Moderate';}
+  else if (aqi > 150 && aqi <= 200) {return 'Poor';}
+  else if (aqi > 200 && aqi <= 300) {return 'Very-poor';}
+}
+
+export function getAqiColor(aqi) {
+  if (aqi <= 50) {return "rgb(0, 212, 39)"; }
+  else if (aqi > 50 && aqi <= 100) { return "rgb(0, 197, 197)"; }
+  else if (aqi > 100 && aqi <= 150) {return "orange" ; }
+  else if (aqi > 150 && aqi <= 200) {return "red"; }
+  else if (aqi > 200 && aqi <= 300) {return "purple";}
+}
+
 export function computeAQI(pm25, pm10) {
   const pm25Trunc = truncate(pm25, 1); // 1 decimal
   const pm10Trunc = truncate(pm10, 0); // integer

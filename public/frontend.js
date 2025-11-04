@@ -1,5 +1,5 @@
 import { locationData } from "./data.js";
-import { computeAQI } from "./aqiConversion.js";
+import { computeAQI, getAqiColor, getAqiSummary } from "./aqiConversion.js";
 
 document.addEventListener("DOMContentLoaded", () => {
 
@@ -7,7 +7,7 @@ const changeButton = document.querySelector('.change-btn');
 const refreshButton = document.querySelector('.refresh-btn');
 const locationSelector = document.querySelector('.location-selector');
 
-loadData();
+
 
 //HTML Renderer
 
@@ -23,8 +23,11 @@ async function renderPage() {
     const pm2_5 = data.pm2_5;
     const pm10 = data.pm10;
     const newAQI = computeAQI(pm2_5, pm10);
+    const aqiSummary =  getAqiSummary(newAQI);
+    const aqiColor = getAqiColor(newAQI);
+    document.querySelector('.aqi').style.backgroundColor = aqiColor;
 
-    renderAqiHTML(newAQI);
+    renderAqiHTML(newAQI, aqiSummary);
     renderLocationHTML(name, country);
     renderPollutantsHTML(pm2_5, pm10);
 }
@@ -60,14 +63,15 @@ function renderLocationHTML(name, country) {
     document.querySelector('.header').innerHTML = html;
 }
 
-function aqiHTML(aqi) {
-    const html = `<div class="aqi">${aqi}</div>`;
+function aqiHTML(aqi, aqiSummary) {
+    const html = `<div class="aqi">${aqi}</div>
+                <div class="aqi-summary">${aqiSummary}</div>`;
     return html;
 }
 
-function renderAqiHTML(aqi) {
+function renderAqiHTML(aqi, aqiSummary) {
     let html = ``;
-    html += aqiHTML(aqi);
+    html += aqiHTML(aqi, aqiSummary);
     document.querySelector('.aqi-display').innerHTML = html;
 }
 
@@ -78,7 +82,7 @@ function getLocationName() {
 }
 
 async function updateLocationName() {
-    if (getLocationName() != "use current location"){
+    if (getLocationName() != "Use current location"){
         const coords = getCoordsByName(getLocationName());
         const locationData = await fetchLocation(coords);
         const name = locationData.name;
@@ -102,6 +106,10 @@ async function updateAqi() {
         const pm2_5 = data.pm2_5;
         const pm10 = data.pm10;
         const newAQI = computeAQI(pm2_5, pm10);
+        const aqiSummary = getAqiSummary(newAQI);
+        const aqiColor = getAqiColor(newAQI);
+        document.querySelector('.aqi').style.backgroundColor = aqiColor;
+        document.querySelector('.aqi-summary').textContent = aqiSummary;
         document.querySelector('.aqi').textContent = newAQI;
     } else {
         const coords = await geoLocation();
@@ -109,6 +117,10 @@ async function updateAqi() {
         const pm2_5 = data.pm2_5;
         const pm10 = data.pm10;
         const newAQI = computeAQI(pm2_5, pm10);
+        const aqiSummary = getAqiSummary(newAQI);
+        const aqiColor = getAqiColor(newAQI);
+        document.querySelector('.aqi').style.backgroundColor = aqiColor;
+        document.querySelector('.aqi-summary').textContent = aqiSummary;
         document.querySelector('.aqi').textContent = newAQI;
     }
 }
@@ -124,8 +136,12 @@ async function loadData() {
     const pm2_5 = data.pm2_5;
     const pm10 = data.pm10;
     const newAQI = computeAQI(pm2_5, pm10);
+    const aqiSummary = getAqiSummary(newAQI);
+    const aqiColor = getAqiColor(newAQI);
+    document.querySelector('.aqi').style.backgroundColor = aqiColor;
     document.querySelector('.location-display').textContent = `${locationName}, ${locationCountry}`;
     document.querySelector('.aqi').textContent = newAQI;
+    document.querySelector('.aqi-summary').textContent = aqiSummary;
     document.querySelector('.pm25').textContent = `PM2.5 : ${data.pm2_5}`;
     document.querySelector('.pm10').textContent = `PM2.5 : ${data.pm10}`;
 }
