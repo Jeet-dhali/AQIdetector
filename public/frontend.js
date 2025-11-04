@@ -152,13 +152,13 @@ async function updatePollutantData() {
     if (getLocationName() != "Use current location") {
         const coords = getCoordsByName(getLocationName());
         const data = await fetchRequestToBackend(coords);
-        document.querySelector('.pm25').textContent = data.pm2_5;
-        document.querySelector('.pm10').textContent = data.pm10;
+        document.querySelector('.pm25').textContent = `PM2.5 : ${data.pm2_5}`;
+        document.querySelector('.pm10').textContent = `PM10 : ${data.pm10}`;
     } else {
         const coords = await geoLocation();
         const data = await fetchRequestToBackend(coords);
         document.querySelector('.pm25').textContent = `PM2.5 : ${data.pm2_5}`;
-        document.querySelector('.pm10').textContent = `PM2.5 : ${data.pm10}`;
+        document.querySelector('.pm10').textContent = `PM10 : ${data.pm10}`;
     }
 }
 
