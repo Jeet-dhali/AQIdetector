@@ -25,11 +25,13 @@ async function renderPage() {
     const newAQI = computeAQI(pm2_5, pm10);
     const aqiSummary =  getAqiSummary(newAQI);
     const aqiColor = getAqiColor(newAQI);
-    document.querySelector('.aqi').style.backgroundColor = aqiColor;
 
+    renderLocationOptionsHTML()
     renderAqiHTML(newAQI, aqiSummary);
     renderLocationHTML(name, country);
     renderPollutantsHTML(pm2_5, pm10);
+
+    document.querySelector('.aqi').style.backgroundColor = aqiColor;
 }
 
 function pollutantsHTML(pm2_5, pm10) {
@@ -73,6 +75,24 @@ function renderAqiHTML(aqi, aqiSummary) {
     let html = ``;
     html += aqiHTML(aqi, aqiSummary);
     document.querySelector('.aqi-display').innerHTML = html;
+}
+
+function locationOptionsHTML() {
+
+    const name = locationData.map((data) => {
+                        return `<option>${data.name}</option>`;
+                    }).join('');
+
+    const html = `<option disabled selected class="location-names">Change location</option>
+                        ${name}
+                        <option class="location-names">Use current location</option>`;
+    return html;
+}
+
+function renderLocationOptionsHTML() {
+    let html = ``;
+    html +=  locationOptionsHTML();
+    document.querySelector('.location-selector').innerHTML = html;
 }
 
 //location state
