@@ -10,6 +10,7 @@ body {
     border-radius: 20px;
     overflow: hidden;
     box-shadow: 0 4px 10px rgba(212, 212, 212, 0.475);
+    z-index: 1;
 }
 
 .main {
@@ -22,4 +23,35 @@ body {
     align-items: center;
     justify-content: center;
     width: 100vw;
+    padding: 20px;  
+    box-sizing: border-box;
+}
+
+@media (max-width: 1024px) {
+    #map {
+        width: 90vw;
+        height: 450px;
+        border-radius: 18px;
+    }
+}
+
+@media (max-width: 768px) {
+    #map {
+        width: 90vw;
+        height: 400px;
+        border-radius: 18px;
+    }
+}
+
+@media (max-width: 480px) {
+    #map {
+        width: 95vw;
+        height: 350px;
+        border-radius: 15px;
+        box-shadow: 0 2px 8px rgba(212, 212, 212, 0.35);
+    }
+
+    .map-container {
+        padding: 10px;
+    }
 }

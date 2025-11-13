@@ -7,7 +7,6 @@ body {
 .main {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
 }
 
@@ -19,14 +18,14 @@ body {
     width: 1000px;
     background-color: rgb(6, 15, 58);
     box-shadow: 0 0px 10px rgb(57, 51, 118);
-    margin-bottom: 50px;
+    margin-bottom: 0px;
 }
 
 header {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 20px;
+    margin-top: 0px;
 }
 
 header h1, .location-display{
@@ -232,8 +231,8 @@ header h1, .location-display{
   }
 
   .main {
-    height: auto;
-    padding: 20px 0;
+    padding-top: 0;
+    padding-bottom: 20px;
   }
 
   .main-body {

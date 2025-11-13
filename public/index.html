@@ -9,18 +9,33 @@
 </head>
 <body>
     <main class="main">
+        <div class="sidemenu">
+            <div class="sidebar-top">
+                <div class="menu-text">Menu</div>
+                <div class="close-menu">✖</div>
+            </div>
+            <ul>
+                <li class="selected"><a href="index.html">Dashboard</a></li>
+                <li><a href="map.html">Map</a></li>
+                <li><a href="aqiHistory.html">Aqi History</a></li>
+                <li><a href="charts.html">Charts</a></li>
+            </ul>
+        </div>
         <div class="nav">
             <div class="left-section">
                 <h1>Air Aware</h1>
                 
             </div>
             <div class="right-section">
+                <div class="menu">
                 <ul>
-                    <li class="selected"><a href="index.html">Dashboard</a></li>
-                    <li><a href="map.html">Map</a></li>
-                    <li><a>Aqi History</a></li>
-                    <li><a>Charts</a></li>
+                    <li><a href="index.html">Dashboard</a></li>
+                    <li class="selected"><a href="map.js">Map</a></li>
+                    <li><a href="aqiHistory.html">Aqi History</a></li>
+                    <li><a href="charts.html">Charts</a></li>
                 </ul>
+                </div>
+                <div class="hamburger-menu">☰</div>
             </div>
         </div>
         <div class="main-body">
@@ -64,5 +79,6 @@
         </div>
     </main>
     <script type="module" src="scripts/frontend.js"></script> 
+    <script src="scripts/hamburgerMenu.js"></script>
 </body>
 </html>
