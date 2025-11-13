@@ -7,6 +7,9 @@ body {
 #map {
     height: 500px;
     width: 1000px;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(212, 212, 212, 0.475);
 }
 
 .main {
