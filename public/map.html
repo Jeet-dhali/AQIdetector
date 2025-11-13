@@ -3,9 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles/header.css">
+    <link rel="stylesheet" href="styles/map.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <title>Maps</title>
 </head>
 <body>
-    <script src="map.js"></script>
+    <main class="main">
+        <div class="nav">
+            <div class="left-section">
+                <h1>Air Aware</h1>
+                
+            </div>
+            <div class="right-section">
+                <ul>
+                    <li><a href="index.html">Dashboard</a></li>
+                    <li class="selected"><a href="map.js">Map</a></li>
+                    <li><a>Aqi History</a></li>
+                    <li><a>Charts</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="map-container"><div id="map"></div></div>
+    </main>
+    <script type="module" src="scripts/map.js"></script>
 </body>
 </html>

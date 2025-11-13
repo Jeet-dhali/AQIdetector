@@ -1,0 +1,22 @@
+body {
+    margin: 0px;
+    padding: 0px;
+    background-color: rgb(3, 10, 32);
+}
+
+#map {
+    height: 500px;
+    width: 1000px;
+}
+
+.main {
+    display: flex;
+    flex-direction: column;
+}
+
+.map-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+}
