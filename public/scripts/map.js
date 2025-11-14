@@ -1,6 +1,10 @@
 import { computeAQI, getAqiColor } from "../scripts/aqiConversion.js";
 import { locationData } from "./data.js";
 
+//global vars
+
+let isLoading = false;
+
 //set map
 
 initMap();
@@ -91,54 +95,43 @@ async function setAqiMarker(map) {
       .openPopup();
 }
 
-function setMarkersFromData(map) {
-    locationData.forEach(async (data) => {
-        const coords = {lat: data.lat, lon: data.lon}
+async function setMarkersFromData(map) {
+    setLoading(true);
+    for (const data of locationData) {
+        const coords = { lat: data.lat, lon: data.lon };
         const aqiData = await fetchRequestToBackend(coords);
-        const pm2_5 = aqiData.pm2_5;
-        const pm10  = aqiData.pm10;
 
-        const newAqi = computeAQI(pm2_5, pm10);
+        const newAqi = computeAQI(aqiData.pm2_5, aqiData.pm10);
         const aqiColor = getAqiColor(newAqi);
 
         const markerHtml = `
-        <div style="
-            background:${aqiColor};
-            width:25px;
-            height:25px;
-            border-radius:50%;
-            border:3px solid white;
-            box-shadow:0px 0px 10px rgba(0,0,0,0.4);
-        "></div>
-    `;
+            <div style="background:${aqiColor}; width:25px; height:25px; border-radius:50%; border:3px solid white; box-shadow:0px 0px 10px rgba(0,0,0,0.4);"></div>
+        `;
 
-    const aqiIcon = L.divIcon({
-        html: markerHtml,
-        className: "",
-        iconSize: [25, 25]
-    });
+        const aqiIcon = L.divIcon({
+            html: markerHtml,
+            className: "",
+            iconSize: [25, 25]
+        });
 
-    L.marker([data.lat, data.lon], { icon: aqiIcon })
-      .addTo(map)
-      .bindPopup(`
-        <div style="
-        padding:12px;
-        background:white;
-        border-radius:12px;
-        font-family:sans-serif;
-        box-shadow:0 3px 12px rgba(0,0,0,0.25);
-    ">
-        <div style="text-align:center;">
-            <h2 style="margin:0; font-size:20px;">Air Quality</h2>
-            <h3 style="margin:0; font-size:20px;">${data.name}</h3>
-            <span style="font-size:32px; font-weight:700; color:${aqiColor};">
-                ${newAqi}
-            </span>
-        </div>
-    </div>
-        `)
-      .openPopup();
-    })
+        L.marker([data.lat, data.lon], { icon: aqiIcon })
+         .addTo(map)
+         .bindPopup(`${newAqi}`)
+    }
+    setLoading(false);
+}
+
+function setLoading(state) {
+    isLoading = state;
+    const mapCanvas = document.getElementById('map');
+    const loadingSpinner = document.getElementById('loader');
+    mapCanvas.style.display = state ? 'none' : 'block';
+    if (state) {
+        loadingSpinner.classList.remove('hidden');
+    } else {
+        loadingSpinner.classList.add('hidden');
+    }
+    
 }
 
 async function fetchRequestToBackend(coords) {
